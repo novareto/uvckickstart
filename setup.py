@@ -17,6 +17,7 @@ setup(name='uvckickstart',
           'ZopeSkel',
 	  'grokproject',
 	  'zc.buildout',
+          'zest.releaser',
       ],
     entry_points=
         {'paste.paster_create_template': 

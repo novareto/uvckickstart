@@ -32,18 +32,13 @@ tractor-target-parts = sources
 versions = versions
 eggs = 
 
-[versions]
-zope.container = 3.8.1
-zope.intid = 3.7.0
-martian = 0.11.1
-z3c.schema2xml = 1.1dev
-zope.app.cache = 3.4.1
-
 [sources]
 recipe = infrae.subversion
 as_eggs = True
 urls = 
-    http://uvcsite.googlecode.com/svn/uvcsite/trunk@180 uvcsite
+    http://uvcsite.googlecode.com/svn/uvcsite/trunk/ uvcsite
+    http://uvcsite.googlecode.com/svn/uvc.skin/trunk/ uvc.skin
+    http://uvcsite.googlecode.com/svn/uvc.layout/trunk/ uvc.layout
     http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors/ z3c.schema2xml
 
 [app]

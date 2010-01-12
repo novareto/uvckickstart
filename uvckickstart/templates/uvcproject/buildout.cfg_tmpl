@@ -32,6 +32,9 @@ tractor-target-parts = sources
 versions = versions
 eggs = 
 
+[versions]
+z3c.form = 2.2.0
+
 [sources]
 recipe = infrae.subversion
 as_eggs = True

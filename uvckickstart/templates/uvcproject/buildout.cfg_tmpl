@@ -18,7 +18,8 @@ parts =
 newest = ${newest}
 find-links = http://dev.bg-kooperation.de/pypi/simple
 
-extends = versions.cfg
+extends = http://svn.zope.org/*checkout*/grok/trunk/versions.cfg 
+
 
 # eggs will be installed in the default buildout location
 # (see .buildout/default.cfg in your home directory)

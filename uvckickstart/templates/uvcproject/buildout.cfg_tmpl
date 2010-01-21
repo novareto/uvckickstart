@@ -44,7 +44,7 @@ urls =
     http://uvcsite.googlecode.com/svn/uvcsite/trunk/ uvcsite
     http://uvcsite.googlecode.com/svn/uvc.skin/trunk/ uvc.skin
     http://uvcsite.googlecode.com/svn/uvc.layout/trunk/ uvc.layout
-    http://svn.zope.org/repos/main/megrok.icon/trunk megrok.icon
+    http://svn.zope.org/repos/main/megrok.icon/branches/utility-less/ megrok.icon
     http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors/ z3c.schema2xml
 
 [app]

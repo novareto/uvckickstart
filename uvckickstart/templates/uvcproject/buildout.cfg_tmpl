@@ -18,7 +18,7 @@ parts =
 newest = ${newest}
 find-links = http://dev.bg-kooperation.de/pypi/simple
 
-extends = http://svn.zope.org/*checkout*/grok/trunk/versions.cfg 
+extends = http://grok.zope.org/releaseinfo/grok-1.1a2.cfg  
 
 
 # eggs will be installed in the default buildout location
@@ -35,6 +35,7 @@ eggs =
 
 [versions]
 z3c.form = 2.2.0
+zope.app.container = 3.8.1
 
 [sources]
 recipe = infrae.subversion

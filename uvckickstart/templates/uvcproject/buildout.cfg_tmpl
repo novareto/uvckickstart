@@ -18,7 +18,7 @@ parts =
 newest = ${newest}
 find-links = http://dev.bg-kooperation.de/pypi/simple
 
-extends = http://grok.zope.org/releaseinfo/grok-1.1a2.cfg  
+extends = http://grok.zope.org/releaseinfo/grok-1.1rc1.cfg  
 
 
 # eggs will be installed in the default buildout location

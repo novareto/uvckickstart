@@ -26,16 +26,18 @@ extends = http://grok.zope.org/releaseinfo/grok-1.1rc1.cfg
 # unless you specify an eggs-directory option here.
 ${eggs_dir}
 
-extensions = buildout.eggtractor
+extensions = 
+    buildout.eggtractor
+    buildout.dumppickedversions
+
 tractor-src-directory = src 
 tractor-target-parts = sources 
 
+dump-picked-versions-file = uvc.cfg
+overwrite-picked-versions-file = False
+
 versions = versions
 eggs = 
-
-[versions]
-z3c.form = 2.2.0
-zope.app.container = 3.8.1
 
 [sources]
 recipe = infrae.subversion
@@ -44,7 +46,6 @@ urls =
     http://uvcsite.googlecode.com/svn/uvcsite/trunk/ uvcsite
     http://uvcsite.googlecode.com/svn/uvc.skin/trunk/ uvc.skin
     http://uvcsite.googlecode.com/svn/uvc.layout/trunk/ uvc.layout
-    http://svn.zope.org/repos/main/megrok.icon/branches/utility-less/ megrok.icon
     http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors/ z3c.schema2xml
 
 [app]

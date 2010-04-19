@@ -39,6 +39,9 @@ overwrite-picked-versions-file = False
 versions = versions
 eggs = 
 
+[versions]
+grokui.admin = 0.6.1
+
 [sources]
 recipe = infrae.subversion
 as_eggs = True

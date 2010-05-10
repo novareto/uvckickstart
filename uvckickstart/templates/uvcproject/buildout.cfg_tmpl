@@ -1,7 +1,6 @@
 [buildout]
 develop = 
 parts = 
-    sources 
     eggbasket 
     app 
     i18n 
@@ -27,6 +26,7 @@ extends = http://grok.zope.org/releaseinfo/grok-1.1rc1.cfg
 ${eggs_dir}
 
 extensions = 
+    mr.developer
     buildout.eggtractor
     buildout.dumppickedversions
 
@@ -36,6 +36,10 @@ tractor-target-parts = sources
 dump-picked-versions-file = uvc.cfg
 overwrite-picked-versions-file = False
 
+sources = sources
+auto-checkout =
+   z3c.schema2xml
+
 versions = versions
 eggs = 
 
@@ -43,13 +47,10 @@ eggs =
 grokui.admin = 0.6.1
 
 [sources]
-recipe = infrae.subversion
-as_eggs = True
-urls = 
-    http://uvcsite.googlecode.com/svn/uvcsite/trunk/ uvcsite
-    http://uvcsite.googlecode.com/svn/uvc.skin/trunk/ uvc.skin
-    http://uvcsite.googlecode.com/svn/uvc.layout/trunk/ uvc.layout
-    http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors/ z3c.schema2xml
+z3c.schema2xml = svn svn://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors
+uvc.skin       = svn https://uvcsite.googlecode.com/svn/uvc.skin/trunk 
+uvc.layout     = svn https://uvcsite.googlecode.com/svn/uvc.layout/trunk 
+uvc.widgets    = svn https://uvcsite.googlecode.com/svn/uvc.widgets/trunk
 
 [app]
 recipe = zc.recipe.egg

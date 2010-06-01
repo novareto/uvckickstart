@@ -42,7 +42,6 @@ eggs =
 
 [versions]
 buildout.eggtractor = 0.6
-uvckickstart = 2.0.3
 grokproject = 1.0.3
 ZopeSkel = 2.16
 Cheetah = 2.2.1

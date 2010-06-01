@@ -14,9 +14,9 @@ parts =
     debug_ini
 
 
-newest = ${newest}
+newest = true
 find-links = http://dev.bg-kooperation.de/pypi/simple
-allow-picked-versions = false
+allow-picked-versions = true 
 extends = http://grok.zope.org/releaseinfo/grok-1.1rc1.cfg  
 
 
@@ -35,6 +35,7 @@ tractor-target-parts = sources
 sources = sources
 auto-checkout =
    z3c.schema2xml
+   megrok.z3cform.wizard
 
 versions = versions
 eggs = 
@@ -45,10 +46,10 @@ uvckickstart = 2.0.3
 grokproject = 1.0.3
 ZopeSkel = 2.16
 Cheetah = 2.2.1
-uvcsite = 0.1.16
-uvc.layout = 1.3.1 
-uvc.skin = 0.3.1
-uvc.widgets = 0.5
+uvcsite = 0.1.17
+uvc.layout = 1.3.2 
+uvc.skin = 0.3.2
+uvc.widgets = 0.6
 collective.recipe.omelette = 0.9
 dolmen.app.breadcrumbs = 0.2
 dolmen.app.layout = 0.5.1
@@ -99,10 +100,11 @@ zope.app.homefolder = 3.5.0
 
 
 [sources]
-z3c.schema2xml = svn svn://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors
-uvc.skin       = svn https://uvcsite.googlecode.com/svn/uvc.skin/trunk 
-uvc.layout     = svn https://uvcsite.googlecode.com/svn/uvc.layout/trunk 
-uvc.widgets    = svn https://uvcsite.googlecode.com/svn/uvc.widgets/trunk
+uvc.skin              = svn https://uvcsite.googlecode.com/svn/uvc.skin/trunk 
+uvc.layout            = svn https://uvcsite.googlecode.com/svn/uvc.layout/trunk 
+uvc.widgets           = svn https://uvcsite.googlecode.com/svn/uvc.widgets/trunk
+z3c.schema2xml        = svn http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors
+megrok.z3cform.wizard = svn http://svn.zope.org/repos/main/megrok.z3cform.wizard/trunk
 
 [app]
 recipe = zc.recipe.egg

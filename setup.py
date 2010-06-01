@@ -15,7 +15,7 @@ setup(name='uvckickstart',
       url="http://uvwebcommunity.bg-kooperation.de",
       install_requires=[
           'ZopeSkel',
-	  'grokproject',
+	  'grokproject==1.0.3',
 	  'zc.buildout',
           'zest.releaser',
       ],

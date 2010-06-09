@@ -155,10 +155,10 @@ filestorage = $${buildout:directory}/var/filestorage
 blobstorage = $${buildout:directory}/var/blobstorage
 logfiles = $${buildout:directory}/var/log
 extra = 
-hostname = localhost
-port = 25
-username = 
-password = 
+mailer_hostname = localhost
+mailer_port = 25
+mailer_username = 
+mailer_password = 
 
 [site_zcml]
 recipe = z3c.recipe.template

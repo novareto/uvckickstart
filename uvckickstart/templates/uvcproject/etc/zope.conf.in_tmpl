@@ -50,8 +50,8 @@ $${zope_conf:extra}
 # The mailer uses zope.sendmail with a queued delivery via an SMTP backend.
 <product-config mailer>
     queue-path $${buildout:directory}/var/mailer-queue
-    hostname $${zope_conf:hostname}
-    port $${zope_conf:port}
-    username $${zope_conf:username}
-    password $${zope_conf:password}
+    hostname $${zope_conf:mailer_hostname}
+    port $${zope_conf:mailer_port}
+    username $${zope_conf:mailer_username}
+    password $${zope_conf:mailer_password}
 </product-config>

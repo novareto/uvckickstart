@@ -14,16 +14,17 @@ parts =
     log
     data
     supervisor
-
+    zdaemon_conf
 
 newest = true
 find-links = http://dev.bg-kooperation.de/pypi/simple
-allow-picked-versions = true 
+allow-picked-versions = false 
 extends = 
     ${version_info_url}  
-    http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.0/versions.cfg
-extends-cache = extends-cache
+    http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.1/versions.cfg
+    versions.cfg
 
+extends-cache = extends-cache
 
 
 # eggs will be installed in the default buildout location
@@ -34,6 +35,7 @@ ${eggs_dir}
 extensions = 
     mr.developer
     buildout.eggtractor
+    buildout.dumppickedversions
 
 tractor-src-directory = src 
 tractor-target-parts = sources 

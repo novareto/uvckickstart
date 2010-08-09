@@ -4,6 +4,7 @@ parts =
     app 
     debug_ini
     deploy_ini 
+    profile_ini
     i18n 
     mkdirs
     site_zcml 
@@ -15,6 +16,9 @@ parts =
     data
     supervisor
     zdaemon_conf
+    backup
+    repozo
+
 
 newest = true
 find-links = http://dev.bg-kooperation.de/pypi/simple
@@ -43,25 +47,25 @@ tractor-target-parts = sources
 sources = sources
 auto-checkout =
    z3c.schema2xml
-   megrok.z3cform.wizard
-   megrok.icon
+   dolmen.forms.wizard
 
 versions = versions
-eggs = 
+
+[versions]
 
 
 [sources]
+uvcsite               = svn https://uvcsite.googlecode.com/svn/uvcsite/trunk 
 uvc.skin              = svn https://uvcsite.googlecode.com/svn/uvc.skin/trunk 
 uvc.layout            = svn https://uvcsite.googlecode.com/svn/uvc.layout/trunk 
 uvc.widgets           = svn https://uvcsite.googlecode.com/svn/uvc.widgets/trunk
 z3c.schema2xml        = svn http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors
-megrok.z3cform.wizard = svn http://svn.zope.org/repos/main/megrok.z3cform.wizard/trunk
-megrok.icon           = svn http://svn.zope.org/repos/main/megrok.icon/trunk
+dolmen.forms.wizard   = git http://devel.dolmen-project.org/dolmen.forms.wizard.git
+
 
 [app]
 recipe = zc.recipe.egg
 eggs =
-    $${buildout:eggs}
     $${sources:eggs}
     uvcsite
     uvckickstart
@@ -69,7 +73,9 @@ eggs =
     Paste
     PasteScript
     PasteDeploy
+    repoze.profile
 interpreter = python-console
+
 
 [mkdirs]
 recipe = z3c.recipe.mkdir
@@ -78,10 +84,12 @@ paths =
     $${zope_conf:logfiles}
     $${zope_conf:blobstorage}
 
+
 [test]
 recipe = zc.recipe.testrunner
 eggs = $${app:eggs} 
 defaults = ['--tests-pattern', '^f?tests$$', '-v', '-c']
+
 
 # this section named so that the i18n scripts are called bin/i18n...
 [i18n]
@@ -92,6 +100,7 @@ domain = ${package}
 output = 
 zcml =
 
+
 # This section is named so that the zpasswd utility is
 # called `zpasswd`
 [zpasswd]
@@ -99,6 +108,7 @@ recipe = z3c.recipe.dev:script
 eggs = uvcsite 
 module = zope.app.server.zpasswd
 method = main
+
 
 [zope_conf]
 recipe = z3c.recipe.template
@@ -113,15 +123,18 @@ mailer_port = 25
 mailer_username = 
 mailer_password = 
 
+
 [site_zcml]
 recipe = z3c.recipe.template
 input = etc/site.zcml.in
 output = $${buildout:parts-directory}/etc/site.zcml
 
+
 [zdaemon_conf]
 recipe = z3c.recipe.template
 input = etc/zdaemon.conf.in
 output = $${buildout:parts-directory}/etc/zdaemon.conf
+
 
 [deploy_ini]
 recipe = z3c.recipe.template
@@ -130,12 +143,22 @@ output = $${buildout:parts-directory}/etc/deploy.ini
 host = 0.0.0.0
 port = 8080
 
+
 [debug_ini]
 recipe = z3c.recipe.template
 input = etc/debug.ini.in
 output = $${buildout:parts-directory}/etc/debug.ini
 host = 0.0.0.0
 port = 8080
+
+
+[profile_ini]
+recipe = collective.recipe.template
+input = etc/profile.ini.in
+output = $${buildout:parts-directory}/etc/profile.ini
+host = 0.0.0.0
+port = 8080
+
 
 [interactive_debugger]
 recipe = z3c.recipe.dev:script
@@ -144,11 +167,14 @@ module = grokcore.startup.startup
 method = interactive_debug_prompt
 arguments = zope_conf="$${zope_conf:output}"
 
+
 [data]
 recipe = zc.recipe.filestorage
 
+
 [log]
 recipe = zc.recipe.filestorage
+
 
 [supervisor]
 recipe = collective.recipe.supervisor
@@ -158,3 +184,16 @@ password = admin
 serverurl = http://localhost:9001
 programs =
       10 uvcsite $${buildout:directory}/bin/paster [serve $${buildout:parts-directory}/etc/deploy.ini] 
+
+
+[backup]
+recipe = collective.recipe.backup
+full = true
+debug = true
+
+
+[repozo]
+recipe = zc.recipe.egg
+eggs = ZODB3
+scripts = repozo
+

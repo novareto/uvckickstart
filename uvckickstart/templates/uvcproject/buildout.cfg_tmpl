@@ -25,7 +25,7 @@ find-links = http://dev.bg-kooperation.de/pypi/simple
 allow-picked-versions = false 
 extends = 
     ${version_info_url}  
-    http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.1/versions.cfg
+    http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.2/versions.cfg
     versions.cfg
 
 extends-cache = extends-cache
@@ -48,6 +48,8 @@ sources = sources
 auto-checkout =
    z3c.schema2xml
    dolmen.forms.wizard
+   zeam.form.base
+   zeam.form.ztk
 
 versions = versions
 
@@ -61,6 +63,8 @@ uvc.layout            = svn https://uvcsite.googlecode.com/svn/uvc.layout/trunk
 uvc.widgets           = svn https://uvcsite.googlecode.com/svn/uvc.widgets/trunk
 z3c.schema2xml        = svn http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors
 dolmen.forms.wizard   = git http://devel.dolmen-project.org/dolmen.forms.wizard.git
+zeam.form.base        = git http://github.com/thefunny42/Zeam-Form.git
+zeam.form.ztk         = git http://github.com/thefunny42/Zeam-Form-ZTK.git
 
 
 [app]

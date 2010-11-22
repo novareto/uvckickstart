@@ -15,7 +15,7 @@ parts =
     log
     data
     supervisor
-    zdaemon_conf
+    uvcsite-ctl 
     backup
     repozo
 
@@ -24,7 +24,7 @@ newest = true
 find-links = http://dev.bg-kooperation.de/pypi/simple
 allow-picked-versions = false 
 extends = 
-    ${version_info_url}  
+    http://gitweb.dolmen-project.org/misc.git?a=blob_plain;f=dolmen-kgs-dev.cfg;hb=HEAD
     http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.2/versions.cfg
     versions.cfg
 
@@ -48,13 +48,11 @@ sources = sources
 auto-checkout =
    z3c.schema2xml
    dolmen.forms.wizard
-   zeam.form.base
-   zeam.form.ztk
 
 versions = versions
 
 [versions]
-
+zope.pluggableauth = 1.1
 
 [sources]
 uvcsite               = svn https://uvcsite.googlecode.com/svn/uvcsite/trunk 
@@ -62,9 +60,6 @@ uvc.skin              = svn https://uvcsite.googlecode.com/svn/uvc.skin/trunk
 uvc.layout            = svn https://uvcsite.googlecode.com/svn/uvc.layout/trunk 
 uvc.widgets           = svn https://uvcsite.googlecode.com/svn/uvc.widgets/trunk
 z3c.schema2xml        = svn http://svn.zope.org/repos/main/z3c.schema2xml/branches/combined-deserialization-errors
-dolmen.forms.wizard   = git http://devel.dolmen-project.org/dolmen.forms.wizard.git
-zeam.form.base        = git http://github.com/thefunny42/Zeam-Form.git
-zeam.form.ztk         = git http://github.com/thefunny42/Zeam-Form-ZTK.git
 
 
 [app]
@@ -134,10 +129,12 @@ input = etc/site.zcml.in
 output = $${buildout:parts-directory}/etc/site.zcml
 
 
-[zdaemon_conf]
-recipe = z3c.recipe.template
-input = etc/zdaemon.conf.in
-output = $${buildout:parts-directory}/etc/zdaemon.conf
+[uvcsite-ctl] 
+recipe = collective.recipe.scriptgen 
+cmd = $${buildout:bin-directory}/paster 
+arguments = serve $${buildout:parts-directory}/parts/etc/deploy.ini 
+    --daemon --pid-file=$${buildout:directory}/var/daemon.pid 
+    --log-file=$${buildout:directory}/parts/log/daemon.log 
 
 
 [deploy_ini]

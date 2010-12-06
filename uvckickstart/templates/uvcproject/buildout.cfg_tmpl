@@ -18,6 +18,9 @@ parts =
     uvcsite-ctl 
     backup
     repozo
+    omelette
+    debug
+    rungrok
 
 
 newest = true
@@ -25,7 +28,7 @@ find-links = http://dev.bg-kooperation.de/pypi/simple
 allow-picked-versions = false 
 extends = 
     http://gitweb.dolmen-project.org/misc.git?a=blob_plain;f=dolmen-kgs-dev.cfg;hb=HEAD
-    http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.2/versions.cfg
+    http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.3/versions.cfg
     versions.cfg
 
 extends-cache = extends-cache
@@ -53,6 +56,11 @@ versions = versions
 
 [versions]
 zope.pluggableauth = 1.1
+
+[omelette]
+recipe = collective.recipe.omelette
+eggs = $${app:eggs}
+
 
 [sources]
 uvcsite               = svn https://uvcsite.googlecode.com/svn/uvcsite/trunk 
@@ -132,9 +140,21 @@ output = $${buildout:parts-directory}/etc/site.zcml
 [uvcsite-ctl] 
 recipe = collective.recipe.scriptgen 
 cmd = $${buildout:bin-directory}/paster 
-arguments = serve $${buildout:parts-directory}/parts/etc/deploy.ini 
+arguments = serve $${buildout:parts-directory}/etc/deploy.ini 
     --daemon --pid-file=$${buildout:directory}/var/daemon.pid 
     --log-file=$${buildout:directory}/parts/log/daemon.log 
+
+
+[debug] 
+recipe = collective.recipe.scriptgen 
+cmd = $${buildout:bin-directory}/paster 
+arguments = serve $${buildout:parts-directory}/etc/debug.ini 
+
+
+[rungrok] 
+recipe = collective.recipe.scriptgen 
+cmd = $${buildout:bin-directory}/paster 
+arguments = serve $${buildout:parts-directory}/etc/deploy.ini 
 
 
 [deploy_ini]

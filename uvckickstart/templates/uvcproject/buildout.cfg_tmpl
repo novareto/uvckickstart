@@ -27,7 +27,7 @@ newest = true
 find-links = http://dev.bg-kooperation.de/pypi/simple
 allow-picked-versions = false 
 extends = 
-    http://gitweb.dolmen-project.org/misc.git?a=blob_plain;f=dolmen-kgs-dev.cfg;hb=HEAD
+    http://gitweb.dolmen-project.org/misc.git?a=blob_plain;f=dolmen-kgs-1.0dev.cfg;hb=090a7879a17a6247e1f1c2d2f6ca99baa56a7c02
     http://uvcsite.googlecode.com/svn/uvcsite/tags/0.2.3/versions.cfg
     versions.cfg
 

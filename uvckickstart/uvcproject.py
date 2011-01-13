@@ -9,6 +9,11 @@ class UVCProject(GrokProject):
     _template_dir = 'templates/uvcproject'
     summary = "A Extranet Template"
 
+
+class UVCDeployment(GrokProject):
+    _template_dir = 'templates/uvcdeployment'
+    summary = "A UVCSite Deployment Template"
+
 #
 ## Runner
 #
@@ -30,6 +35,9 @@ def main():
                       default=False, help="Be verbose.")
     parser.add_option('--version', action="store_true", dest="version",
                       default=False, help="Show grokproject version.")
+    parser.add_option('--deployment', action="store_true", dest="deployment",
+                      default=False, 
+                      help="Should i create an deployment Environment.")
     
     # Options that override the interactive part of filling the templates.
     for var in GrokProject.vars:
@@ -79,8 +87,13 @@ def main():
         print "Please choose a different project name."
         sys.exit(1)
 
+
+    if options.deployment:
+        exit_code = runner.run(option_args + ['-t', 'uvcdeployment', project]
+                           + extra_args)
     # Create the project
-    exit_code = runner.run(option_args + ['-t', 'uvcproject', project]
+    else:
+        exit_code = runner.run(option_args + ['-t', 'uvcproject', project]
                            + extra_args)
     sys.exit(exit_code)
 

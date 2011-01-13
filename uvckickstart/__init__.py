@@ -1,2 +1,2 @@
 from uvcaddon import UVCAddOn
-from uvcproject import UVCProject
+from uvcproject import UVCProject, UVCDeployment

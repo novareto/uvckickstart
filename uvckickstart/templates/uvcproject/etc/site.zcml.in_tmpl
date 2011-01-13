@@ -2,6 +2,8 @@
            i18n_domain="${package}">
 
   <include package="uvcsite" />
+  <includePlugins package="uvcsite" />
+  <includePluginsOverrides package="uvcsite" /> 
 
     <configure i18n_domain="${package}">
       <principal id="zope.manager"

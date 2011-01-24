@@ -15,6 +15,8 @@ parts =
     zeo
     pack_backup
     supervisor_reboot
+    haproxy-build
+    haproxy-conf
 
 
 newest = true
@@ -150,6 +152,8 @@ serverurl = http://localhost:9001
 programs =
     100 zeo $${buildout:directory}/parts/zeo/bin/runzeo
     200 uvcsite $${buildout:directory}/bin/paster [serve $${buildout:parts-directory}/etc/deploy.ini] 
+    300 haproxy ${buildout:directory}/bin/haproxy [ -f ${buildout:parts-directory}/etc/haproxy.conf -db ]
+
 
 
 [backup]
@@ -175,3 +179,19 @@ command = $${buildout:directory}/bin/zeopack && $${buildout:directory}/bin/backu
 recipe = z3c.recipe.usercrontab
 times = @reboot
 command = $${buildout:directory}/bin/supervisord
+
+
+[haproxy-build]
+recipe = plone.recipe.haproxy
+url = http://dist.plone.org/thirdparty/haproxy-1.4.8.zip
+
+[haproxy-conf]
+recipe = collective.recipe.template
+input = etc/haproxy.conf.in
+output = $${buildout:parts-directory}/etc/haproxy.conf
+maxconn = 24000
+ulimit-n = 65536
+user = christian
+group = staff
+bind = 127.0.0.1:8088
+

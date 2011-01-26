@@ -3,8 +3,8 @@ zope_conf = %(here)s/zope.conf
 
 [server:main]
 use = egg:Paste#http
-host = $${:host}
-port = $${:port}
+host = $${settings:host}
+port = $${settings:port}
 
 [pipeline:main]
 pipeline = accesslogging evalexception grok

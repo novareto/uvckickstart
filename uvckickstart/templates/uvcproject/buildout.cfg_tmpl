@@ -12,12 +12,7 @@ parts =
     zope_conf 
     zpasswd
     interactive_debugger
-    log
-    data
-    supervisor
     uvcsite-ctl 
-    backup
-    repozo
     omelette
     debug
     rungrok
@@ -187,34 +182,3 @@ eggs = uvcsite
 module = grokcore.startup.startup
 method = interactive_debug_prompt
 arguments = zope_conf="$${zope_conf:output}"
-
-
-[data]
-recipe = zc.recipe.filestorage
-
-
-[log]
-recipe = zc.recipe.filestorage
-
-
-[supervisor]
-recipe = collective.recipe.supervisor
-port = 9001
-user = admin
-password = admin 
-serverurl = http://localhost:9001
-programs =
-      10 uvcsite $${buildout:directory}/bin/paster [serve $${buildout:parts-directory}/etc/deploy.ini] 
-
-
-[backup]
-recipe = collective.recipe.backup
-full = true
-debug = true
-
-
-[repozo]
-recipe = zc.recipe.egg
-eggs = ZODB3
-scripts = repozo
-

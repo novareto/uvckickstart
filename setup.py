@@ -22,7 +22,6 @@ setup(name='uvckickstart',
     entry_points=
         {'paste.paster_create_template': 
 	        ['uvcaddon = uvckickstart:UVCAddOn',
-                 'uvcdeployment = uvckickstart:UVCDeployment',
 		 'uvcproject = uvckickstart:UVCProject'],
 	 'console_scripts': 
 	     ['uvcproject = uvckickstart.uvcproject:main',

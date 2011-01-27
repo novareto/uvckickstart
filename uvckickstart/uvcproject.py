@@ -1,17 +1,32 @@
-import sys
-import pkg_resources
+from grokproject import GrokProject
 from paste.script import command
 import optparse
+import pkg_resources
 import re
-from grokproject import GrokProject
+import subprocess
+import sys
+import os.path
 
 class UVCProject(GrokProject):
     _template_dir = 'templates/uvcproject'
-    summary = "A Extranet Template"
+    summary = "An extranet template"
 
-    def add_svn_repository(self, vars, output_dir):
-        super(UVCProject, self).add_svn_repository(vars, output_dir)
+    def run_command(self, *args):
+        proc = subprocess.Popen(args, stdout=subprocess.PIPE)
+        stdout, stderr = proc.communicate()
+        if proc.wait() != 0:
+            raise RuntimeError("Error running command: %s" % ' '.join(args))
+
+    def pre(self, cmd, output_dir, vars):
+        super(UVCProject, self).pre(cmd, output_dir, vars)
         self.run_command('svn', 'ps', 'svn:ignore', 'buildout.cfg', output_dir)
+
+    def post(self, cmd, output_dir, vars):
+        # As the template adds the file although we want to ignore it, we have
+        # to mark it deleted again. Grrr.
+        self.run_command('svn', 'rm', '--keep-local',
+                         os.path.join(output_dir, 'buildout.cfg'))
+        super(UVCProject, self).post(cmd, output_dir, vars)
 
 #
 ## Runner
@@ -34,7 +49,7 @@ def main():
                       default=False, help="Be verbose.")
     parser.add_option('--version', action="store_true", dest="version",
                       default=False, help="Show grokproject version.")
-    
+
     # Options that override the interactive part of filling the templates.
     for var in GrokProject.vars:
         option_name = '--'+var.name.replace('_', '-')
@@ -44,7 +59,7 @@ def main():
                 help=var.description)
 
     options, args = parser.parse_args()
-    
+
     if options.version:
         print get_version()
         return 0
@@ -95,4 +110,3 @@ def get_version():
     if info.has_version and info.version:
         return info.version
     return 'Unknown'
-

@@ -7,25 +7,38 @@ import subprocess
 import sys
 import os.path
 
+
+def run_command(*args):
+    proc = subprocess.Popen(args,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    stdout, stderr = proc.communicate()
+    if proc.wait() != 0:
+        raise RuntimeError("Error running command: %s" % ' '.join(args))
+
+
+def is_svn_working_copy(path):
+    try:
+        run_command('svn', 'info', path)
+    except RuntimeError:
+        return False
+    return True
+
+
 class UVCProject(GrokProject):
     _template_dir = 'templates/uvcproject'
     summary = "An extranet template"
 
-    def run_command(self, *args):
-        proc = subprocess.Popen(args, stdout=subprocess.PIPE)
-        stdout, stderr = proc.communicate()
-        if proc.wait() != 0:
-            raise RuntimeError("Error running command: %s" % ' '.join(args))
-
     def pre(self, cmd, output_dir, vars):
         super(UVCProject, self).pre(cmd, output_dir, vars)
-        self.run_command('svn', 'ps', 'svn:ignore', 'buildout.cfg', output_dir)
+        if is_svn_working_copy(output_dir):
+            run_command('svn', 'ps', 'svn:ignore', 'buildout.cfg', output_dir)
 
     def post(self, cmd, output_dir, vars):
         # As the template adds the file although we want to ignore it, we have
         # to mark it deleted again. Grrr.
-        self.run_command('svn', 'rm', '--keep-local',
-                         os.path.join(output_dir, 'buildout.cfg'))
+        if is_svn_working_copy(output_dir):
+            run_command('svn', 'rm', '--keep-local',
+                        os.path.join(output_dir, 'buildout.cfg'))
         super(UVCProject, self).post(cmd, output_dir, vars)
 
 #

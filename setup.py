@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '2.4.4dev'
+version = '2.5.0'
 
 setup(name='uvckickstart',
       version=version,

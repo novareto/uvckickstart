@@ -7,7 +7,7 @@ host = $${settings:host}
 port = $${settings:port}
 
 [pipeline:main]
-pipeline = accesslogging gzip grok
+pipeline = accesslogging gzip fanstatic grok
 
 [app:grok]
 use = egg:grokcore.startup
@@ -19,6 +19,13 @@ use = egg:Paste#gzip
 use = egg:Paste#translogger
 setup_console_handler = False
 
+[filter:fanstatic]
+use = egg:fanstatic#fanstatic
+bottom = true
+versioning = true
+minified = true
+rollup = true
+recompute_hashes = true
 
 # Logging configuration
 

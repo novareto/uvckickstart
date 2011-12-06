@@ -9,10 +9,19 @@ port = $${settings:port}
 [pipeline:main]
 pipeline = 
     egg:repoze.profile#profile
+    fanstatic
     grok
 
 [app:grok]
 use = egg:grokcore.startup
+
+[filter:fanstatic]
+use = egg:fanstatic#fanstatic
+bottom = true
+versioning = true
+minified = true
+rollup = true
+recompute_hashes = true
 
 
 # Logging configuration

@@ -26,6 +26,9 @@ def main():
                       help="Import project to given repository location (this "
                       "will also create the standard trunk/ tags/ branches/ "
                       "hierarchy).")
+    parser.add_option('--registry', dest="registry", default='uvcsite',
+                      help="Please specify a different registry. "
+                      "If you not want a uvcsite-plugin. ")
     options, args = parser.parse_args()
 
     if len(args) != 1:

@@ -27,7 +27,7 @@ setup(name=${repr($project)},
       ],
       entry_points={
          'fanstatic.libraries': [
-            '$project = ${project}.app:library',
+            '$project = ${project}.resources:library',
             ],
          'z3c.autoinclude.plugin': 'target=uvcsite', 
       }

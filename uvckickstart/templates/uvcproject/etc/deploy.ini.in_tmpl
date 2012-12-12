@@ -30,7 +30,13 @@ recompute_hashes = true
 # Logging configuration
 
 [loggers]
-keys = root, grok, accesslogging
+keys = root, grok, accesslogging, uvcsite
+
+[logger_uvcsite]
+level = DEBUG
+handlers = eventlog, console
+qualname = uvcsite
+propagate = 0
 
 [logger_root]
 level = INFO
@@ -51,7 +57,13 @@ qualname = wsgi
 propagate = 0
 
 [handlers]
-keys = eventlog, accesslog
+keys = eventlog, accesslog, console
+
+[handler_console]
+class = StreamHandler
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
 
 [handler_eventlog]
 class = FileHandler
@@ -65,11 +77,18 @@ args = (os.path.join(r'$${buildout:directory}', 'log', 'accesslog.log'), 'a')
 level = INFO
 formatter = accesslog
 
+[handler_sentry]
+class = raven.handlers.logging.SentryHandler
+args = (,)
+level = NOTSET
+formatter = generic
+
 [formatters]
 keys = generic, accesslog
 
 [formatter_generic]
-format = %(asctime)s %(levelname)s [%(name)s] %(message)s
+format = %(asctime)s,%(msecs)03d %(levelname)-5.5s [%(name)s] %(message)s
+datefmt = %H:%M:%S
 
 [formatter_accesslog]
 format = %(message)s

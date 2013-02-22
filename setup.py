@@ -1,5 +1,4 @@
 from setuptools import setup, find_packages
-import sys, os
 
 version = '3.1.10.dev0'
 
@@ -15,16 +14,16 @@ setup(name='uvckickstart',
       url="http://uvwebcommunity.bg-kooperation.de",
       install_requires=[
           'ZopeSkel==2.21.2',
-	  'grokproject>=2.2',
-	  'zc.buildout',
+          'grokproject>=2.9',
+          'zc.buildout==1.7.1',
           'zest.releaser',
       ],
-    entry_points=
-        {'paste.paster_create_template': 
-	        ['uvcaddon = uvckickstart:UVCAddOn',
-		 'uvcproject = uvckickstart:UVCProject'],
-	 'console_scripts': 
-	     ['uvcproject = uvckickstart.uvcproject:main',
-	      'uvcaddon = uvckickstart.uvcaddon:main'],
-	},
+      entry_points=
+      {'paste.paster_create_template':
+       ['uvcaddon = uvckickstart:UVCAddOn',
+        'uvcproject = uvckickstart:UVCProject'],
+       'console_scripts':
+       ['uvcproject = uvckickstart.uvcproject:main',
+        'uvcaddon = uvckickstart.uvcaddon:main'],
+       },
       )

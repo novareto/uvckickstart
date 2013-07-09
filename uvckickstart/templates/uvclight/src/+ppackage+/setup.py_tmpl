@@ -25,10 +25,7 @@ setup(name='${ppackage}',
             '${ppackage} = ${ppackage}.resources:library',
          ],
          'paste.app_factory': [
-             'app = ${ppackage}.utils:app',
-         ],
-         'paste.filter_factory': [
-             'global_config = ${ppackage}.utils:configuration',
+             'app = ${ppackage}.utils:Application',
          ],
       }
       )

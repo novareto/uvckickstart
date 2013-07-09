@@ -3,6 +3,17 @@
 
 from cromlech.configuration.utils import load_zcml
 from cromlech.i18n import register_allowed_languages
+from cromlech.dawnlight import DawnlightPublisher
+from cromlech.browser import PublicationBeginsEvent, PublicationEndsEvent
+from cromlech.browser import IPublicationRoot
+from zope.interface import implements
+from zope.location import Location
+from zope.component.hooks import setSite
+from zope.event import notify
+from cromlech.webob.request import Request
+from cromlech.dawnlight import ViewLookup
+from cromlech.dawnlight import view_locator, query_view
+from zope.component import getGlobalSiteManager
 
 
 def configuration(global_conf, zcml_file, langs):
@@ -26,18 +37,6 @@ def configuration(global_conf, zcml_file, langs):
 
     return app_wrapper
 
-from cromlech.dawnlight import DawnlightPublisher
-from cromlech.browser import PublicationBeginsEvent, PublicationEndsEvent
-from cromlech.browser import IPublicationRoot
-from zope.interface import implements
-from zope.location import Location
-from zope.component.hooks import setSite
-from zope.event import notify
-from cromlech.webob.request import Request
-
-
-from cromlech.dawnlight import ViewLookup
-from cromlech.dawnlight import view_locator, query_view
 view_lookup = ViewLookup(view_locator(query_view))
 
 
@@ -49,6 +48,9 @@ class Site(Location):
 
     def __init__(self, name):
         self.name = name
+
+    def getSiteManager(self):
+        return getGlobalSiteManager()
 
 
 def app(global_conf, name, zcml_file=None, **kwargs):

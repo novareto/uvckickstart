@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
 from fanstatic import Library, Resource
-from js.bootstrap import bootstrap
 
 library = Library('${ppackage}', 'static')

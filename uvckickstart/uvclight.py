@@ -6,27 +6,25 @@ import re
 import subprocess
 import sys
 import os.path
+from paste.script import templates
+from grokproject.utils import run_buildout
+from grokproject.utils import ask_var
+from paste.script.templates import NoDefault
 
 
-def run_command(*args):
-    proc = subprocess.Popen(args,
-                            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    stdout, stderr = proc.communicate()
-    if proc.wait() != 0:
-        raise RuntimeError("Error running command: %s" % ' '.join(args))
-
-
-def is_svn_working_copy(path):
-    try:
-        run_command('svn', 'info', path)
-    except RuntimeError:
-        return False
-    return True
-
-
-class UVCLight(GrokProject):
+class UVCLight(templates.Template):
     _template_dir = 'templates/uvclight'
     summary = "An uvclight extranet template"
+
+    def check_vars(self, vars, cmd):
+        vars['ppackage'] = vars['package'][:-8]
+        return vars
+
+    def post(self, command, output_dir, vars):
+        original_dir = os.getcwd()
+        os.chdir(vars['project'])
+        run_buildout(command.verbose)
+        os.chdir(original_dir)
 
 #
 ## Runner
@@ -41,28 +39,11 @@ def main():
                       help="Import project to given repository location (this "
                       "will also create the standard trunk/ tags/ branches/ "
                       "hierarchy).")
-    parser.add_option('--grokversion', dest="grokversion", default=None,
-                      help="Specify the Grok version to use. GROKVERSION is "
-                      "a string like 0.14.1, 1.0a1 or similar. If not given, "
-                      "the latest version found on the grok website is used.")
     parser.add_option('-v', '--verbose', action="store_true", dest="verbose",
                       default=False, help="Be verbose.")
-    parser.add_option('--version', action="store_true", dest="version",
-                      default=False, help="Show grokproject version.")
-
-    # Options that override the interactive part of filling the templates.
-    for var in GrokProject.vars:
-        option_name = '--'+var.name.replace('_', '-')
-        if not parser.has_option(option_name):
-            parser.add_option(
-                option_name, dest=var.name,
-                help=var.description)
 
     options, args = parser.parse_args()
 
-    if options.version:
-        print get_version()
-        return 0
 
     if len(args) != 1:
         parser.print_usage()
@@ -80,15 +61,6 @@ def main():
     if not options.verbose:
         option_args.append('-q')
 
-    # Process the options that override the interactive part of filling
-    # the templates.
-    extra_args = []
-    for var in GrokProject.vars:
-        supplied_value = getattr(options, var.name)
-        if supplied_value is not None:
-            extra_args.append('%s=%s' % (var.name, supplied_value))
-    if options.grokversion:
-        extra_args.append('grokversion=%s' % options.grokversion)
 
     # Assert that the project name is a valid Python identifier
     if not (project_name_re.match(project).group() == project):
@@ -101,12 +73,6 @@ def main():
 
     # Create the project
     else:
-        exit_code = runner.run(option_args + ['-t', 'uvclight', project]
-                           + extra_args)
+        exit_code = runner.run(option_args + ['-t', 'uvclight', project+'_project'])
     sys.exit(exit_code)
 
-def get_version():
-    info = pkg_resources.get_distribution('grokproject')
-    if info.has_version and info.version:
-        return info.version
-    return 'Unknown'

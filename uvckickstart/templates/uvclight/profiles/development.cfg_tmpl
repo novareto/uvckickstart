@@ -39,8 +39,8 @@ uvclight   = git https://github.com/goschtl/uvclight.git
 [app]
 recipe = z3c.recipe.scripts
 secret = coincoin
-tmp = $${buildout:directory}/tmp
-cachedir = $${buildout:directory}/cache
+tmp = $${buildout:directory}/var/tmp
+cachedir = $${buildout:directory}/var/cache
 eggs =
      Beaker
      Paste

@@ -22,10 +22,12 @@ setup(name='uvckickstart',
       {'paste.paster_create_template':
        ['uvcaddon = uvckickstart:UVCAddOn',
         'uvcproject = uvckickstart:UVCProject',
+        'uvcploneaddon = uvckickstart:UVCPloneAddon',
         'uvclight = uvckickstart:UVCLight'],
        'console_scripts':
        ['uvcproject = uvckickstart.uvcproject:main',
         'uvclight = uvckickstart.uvclight:main',
+        'uvcploneaddon = uvckickstart.uvcploneaddon:main',
         'uvcaddon = uvckickstart.uvcaddon:main'],
        },
       )

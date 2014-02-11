@@ -8,7 +8,6 @@ parts =
     deploy_ini
     instance
     omelette
-    ropeproject
 
 extends = 
     versions.cfg
@@ -71,7 +70,7 @@ paths = $${app:tmp}
 [deploy_ini]
 recipe = collective.recipe.template
 input = etc/deploy.ini.in
-output = $${buildout:directory}/etc/deploy.ini
+output = $${buildout:directory}/parts/etc/deploy.ini
 storage = $${buildout:directory}/var
 
 [instance]
@@ -82,10 +81,6 @@ arguments = serve $${deploy_ini:output}
 
 [omelette]
 recipe = collective.recipe.omelette
-eggs = $${app:eggs}
-
-[ropeproject]
-recipe = collective.recipe.ropeproject
 eggs = $${app:eggs}
 
 [test]

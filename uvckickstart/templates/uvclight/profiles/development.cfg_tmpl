@@ -10,6 +10,7 @@ parts =
     omelette
 
 extends = 
+    https://raw.github.com/goschtl/uvclight/master/requirements/uvclight_1.0.cfg
     versions.cfg
 versions = versions
 find-links = http://pypi.dolmen-project.org/find-links
@@ -28,11 +29,13 @@ tractor-src-directory = src
 tractor-target-parts = app 
 
 auto-checkout = 
- uvclight
+    uvclight
+#   uvc.tb_layout
 
 
 [sources]
-uvclight   = git https://github.com/goschtl/uvclight.git
+uvclight       = git https://github.com/goschtl/uvclight.git
+uvc.tb_layout  = git https://github.com/novareto/uvc.tb_layout.git
 
 
 [app]

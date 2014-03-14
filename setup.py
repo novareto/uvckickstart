@@ -27,6 +27,7 @@ setup(name='uvckickstart',
        'console_scripts':
        ['uvcproject = uvckickstart.uvcproject:main',
         'uvclight = uvckickstart.uvclight:main',
+        'loginserver = uvckickstart.loginserver:main',
         'uvcploneaddon = uvckickstart.uvcploneaddon:main',
         'uvcaddon = uvckickstart.uvcaddon:main'],
        },

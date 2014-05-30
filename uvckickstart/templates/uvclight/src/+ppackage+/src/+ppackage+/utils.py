@@ -36,15 +36,18 @@ class Site(object):
 
     def __init__(self, name):
         self.name = name
-    
+
     def __enter__(self):
         root = Root(self.name)
         setSite(root)
         return root
-        
+
     def __exit__(self, exc_type, exc_value, traceback):
         setSite()
-        
+
+
+publisher = DawnlightPublisher(view_lookup=view_lookup)
+
 
 class Application(object):
 
@@ -57,6 +60,5 @@ class Application(object):
     def __call__(self, environ, start_response):
         request = Request(environ)
         with Site(self.name) as site:
-            publisher = DawnlightPublisher(view_lookup=view_lookup)
             response = publisher.publish(request, site, handle_errors=True)
         return response(environ, start_response)

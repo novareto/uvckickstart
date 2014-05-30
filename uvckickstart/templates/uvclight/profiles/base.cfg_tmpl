@@ -31,6 +31,8 @@ tractor-target-parts = app
 auto-checkout = 
     uvclight
     uvc.design.canvas
+    uvc.themes.dguv
+    uvc.basetheme
 #   uvc.tb_layout
 
 
@@ -38,6 +40,8 @@ auto-checkout =
 uvclight          = git https://github.com/goschtl/uvclight.git
 uvc.tb_layout     = git https://github.com/novareto/uvc.tb_layout.git
 uvc.design.canvas = git https://github.com/novareto/uvc.design.canvas.git
+uvc.themes.dguv   = git https://github.com/novareto/uvc.themes.dguv
+uvc.basetheme     = svn http://dev.bg-kooperation.de/repos/community/uvc.basetheme/trunk/
 
 
 [app]

@@ -32,16 +32,20 @@ auto-checkout =
     uvclight
     uvc.design.canvas
     uvc.themes.dguv
+    uvc.themes.btwidgets
     uvc.basetheme
+    uvc.content
 #   uvc.tb_layout
 
 
 [sources]
-uvclight          = git https://github.com/goschtl/uvclight.git
-uvc.tb_layout     = git https://github.com/novareto/uvc.tb_layout.git
-uvc.design.canvas = git https://github.com/novareto/uvc.design.canvas.git
-uvc.themes.dguv   = git https://github.com/novareto/uvc.themes.dguv
-uvc.basetheme     = svn http://dev.bg-kooperation.de/repos/community/uvc.basetheme/trunk/
+uvclight             = git https://github.com/goschtl/uvclight.git
+uvc.tb_layout        = git https://github.com/novareto/uvc.tb_layout.git
+uvc.design.canvas    = git https://github.com/novareto/uvc.design.canvas.git
+uvc.themes.dguv      = git https://github.com/novareto/uvc.themes.dguv.git
+uvc.themes.btwidgets = git https://github.com/novareto/uvc.themes.bgwidgets.git
+uvc.content          = git https://github.com/novareto/uvc.content.git
+uvc.basetheme        = svn http://dev.bg-kooperation.de/repos/community/uvc.basetheme/trunk/
 
 
 [app]

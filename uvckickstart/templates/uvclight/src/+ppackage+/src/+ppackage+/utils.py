@@ -58,7 +58,9 @@ class Application(object):
         self.name = name
 
     def __call__(self, environ, start_response):
-        request = Request(environ)
-        with Site(self.name) as site:
-            response = publisher.publish(request, site, handle_errors=True)
-        return response(environ, start_response)
+        def publish(environ, start_response):
+            request = Request(environ)
+            with Site(self.name) as site:
+                response = publisher.publish(request, site, handle_errors=True)
+            return response(environ, start_response)
+        return publish(environ, start_response)

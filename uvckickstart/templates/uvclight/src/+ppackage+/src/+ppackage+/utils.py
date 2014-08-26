@@ -51,7 +51,7 @@ publisher = DawnlightPublisher(view_lookup=view_lookup)
 
 class Application(object):
 
-    def __init__(self, global_conf, name, zcml_file=None, langs='en'):
+    def __init__(self, global_conf, name, zcml_file=None, session_key=None, langs='en'):
         load_zcml(zcml_file)
         allowed = langs.strip().replace(',', ' ').split()
         register_allowed_languages(allowed)

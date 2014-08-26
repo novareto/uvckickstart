@@ -1,10 +1,21 @@
-[filter-app:main]
+[pipeline:main]
+pipeline = gzip session fanstatic ${ppackage}
+
+[filter:fanstatic]
 use = egg:fanstatic#fanstatic
 recompute_hashes = false
 versioning = true
 bottom = true
 minified = true
-next = ${ppackage} 
+
+[filter:session]
+use = egg:cromlech.wsgistate#file_session
+session_key = session.key
+session_cache = /tmp/ 
+
+
+[filter:gzip]
+use = egg:Paste#gzip
 
 [filter:locale]
 use = egg:cromlech.i18n#locale
@@ -13,6 +24,7 @@ use = egg:cromlech.i18n#locale
 use = egg:${ppackage}#app
 name = ${ppackage}
 zcml_file = $${zcml:output}
+session_key = session.key
 
 [server:main]
 use = egg:Paste#http

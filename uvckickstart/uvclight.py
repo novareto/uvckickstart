@@ -18,6 +18,7 @@ class UVCLight(templates.Template):
 
     def check_vars(self, vars, cmd):
         vars['ppackage'] = vars['package'][:-8]
+        vars['deploy_ini'] = 'config=' + os.getcwd() + '/' + vars['package'] + '/parts/etc/deploy.ini'
         return vars
 
     def post(self, command, output_dir, vars):

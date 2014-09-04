@@ -27,5 +27,8 @@ setup(name='${ppackage}',
          'paste.app_factory': [
              'app = ${ppackage}.utils:Application',
          ],
+        'pytest11': [
+            '${ppackage}_fixtures = ${ppackage}.tests.fixtures',
+        ]
       }
       )

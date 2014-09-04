@@ -101,4 +101,4 @@ recipe = z3c.recipe.scripts
 eggs = 
     pytest
     $${app:eggs}
-arguments = ['src/'] + sys.argv[1:]
+arguments = ['src/${ppackage}/src/${ppackage}', '-s', '--doctest-glob=*.txt' ] + sys.argv[1:]

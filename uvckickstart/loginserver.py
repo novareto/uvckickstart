@@ -17,7 +17,7 @@ class LoginServer(templates.Template):
     summary = "An uvclight extranet template"
 
     def check_vars(self, vars, cmd):
-        vars['ppackage'] = vars['package'][:-8]
+        vars['ppackage'] = vars['package'][:-11]
         return vars
 
     def post(self, command, output_dir, vars):

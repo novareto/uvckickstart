@@ -36,15 +36,15 @@ class Site(object):
 
     def __init__(self, name):
         self.name = name
-    
+
     def __enter__(self):
         root = Root(self.name)
         setSite(root)
         return root
-        
+
     def __exit__(self, exc_type, exc_value, traceback):
         setSite()
-        
+
 
 class Application(object):
 

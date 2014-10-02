@@ -4,18 +4,106 @@ recompute_hashes = false
 versioning = true
 bottom = true
 minified = true
-next = ${ppackage} 
+next = mapping 
+
 
 [filter:locale]
 use = egg:cromlech.i18n#locale
 
-[app:${ppackage}]
-use = egg:${ppackage}#app
-name = ${ppackage}
+
+[filter:session]
+use = egg:cromlech.wsgistate#file_session
+session_key = gatekeeper.session
+session_cache = $${buildout:directory}/var/sessions
+
+
+[app:gatekeeper]
+use = egg:gatekeeper#keeper
+name = gatekeeper
+dburl = sqlite:///$${settings:admin_db}
+pubkey = $${settings:pubkey}
 zcml_file = $${zcml:output}
+
+
+[app:loginform]
+use = egg:gatekeeper#login
+pkey = $${settings:privkey}
+dest = $${settings:dest} 
+dburl = sqlite:///$${settings:admin_db}
+dbkey = $${settings:dbkey}
+
+
+[app:admin]
+use = egg:gatekeeper#admin
+pkey = $${settings:privkey}
+dburl = sqlite:///$${settings:admin_db}
+dbkey = $${settings:dbkey}
+
+
+[app:timeout]
+use = egg:gatekeeper#timeout
+
+[app:unauthorized]
+use = egg:gatekeeper#unauthorized
+
+[app:mapping]
+use = egg:Paste#urlmap
+filter-with = session
+/ = gatekeeper
+/login = loginform
+/timeout = timeout
+/admin = admin
+/unauthorized = unauthorized
 
 [server:main]
 use = egg:Paste#http
 host = 0.0.0.0
 port = 8080
+
+# Logging configuration
+
+[loggers]
+keys = root, gatekeeper, accesslogging
+
+[logger_root]
+level = INFO 
+handlers = eventlog
+
+[logger_gatekeeper]
+level = DEBUG 
+qualname = gatekeeper
+handlers = eventlog
+propagate = 0 
+
+[logger_accesslogging]
+level = INFO
+handlers = accesslog
+qualname = wsgi
+propagate = 0
+
+[handlers]
+keys = eventlog, accesslog
+
+[handler_eventlog]
+class = StreamHandler 
+args = (sys.stderr,)
+level = NOTSET
+formatter = generic
+
+[handler_accesslog]
+class = FileHandler
+level = INFO
+args = (os.path.join(r'$${buildout:directory}', 'var', 'log', 'accesslog.log'), 'a')
+formatter = accesslog
+
+[formatters]
+keys = generic, accesslog
+
+[formatter_generic]
+format = %(asctime)s %(levelname)s [%(name)s] %(message)s
+
+[formatter_accesslog]
+format = %(message)s
+
+
 

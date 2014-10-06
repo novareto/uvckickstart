@@ -22,9 +22,15 @@ unzip = true
 versions = versions
 eggs-directory = eggs
 
-
 extensions =
     mr.developer
+
+auto-checkout = 
+    uvclight
+    gatekeeper
+    gk.layout
+    uvc.design.canvas
+    uvc.content
 
 
 [settings]
@@ -34,13 +40,6 @@ dest =
 pubkey = 
 privkey = 
 
-
-auto-checkout = 
-    uvclight
-    gatekeeper
-    gk.layout
-    uvc.design.canvas
-    uvc.content
 
 [sources]
 uvclight             = git https://github.com/novareto/uvclight.git

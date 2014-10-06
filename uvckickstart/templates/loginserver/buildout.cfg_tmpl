@@ -26,10 +26,6 @@ eggs-directory = eggs
 extensions =
     mr.developer
 
-auto-checkout = 
-    uvclight
-    gatekeeper
-    gk.layout
 
 [settings]
 admin_db = $${buildout:directory}/var/admin.db
@@ -38,10 +34,20 @@ dest =
 pubkey = 
 privkey = 
 
+
+auto-checkout = 
+    uvclight
+    gatekeeper
+    gk.layout
+    uvc.design.canvas
+    uvc.content
+
 [sources]
-uvclight       = git https://github.com/novareto/uvclight.git
-gatekeeper     = git https://github.com/novareto/gatekeeper.git
-gk.layout      = git https://github.com/novareto/gk.layout.git
+uvclight             = git https://github.com/novareto/uvclight.git
+gatekeeper           = git https://github.com/novareto/gatekeeper.git
+gk.layout            = git https://github.com/novareto/gk.layout.git
+uvc.content          = git https://github.com/novareto/uvc.content.git
+uvc.design.canvas    = git https://github.com/novareto/uvc.design.canvas.git
 
 [app]
 recipe = z3c.recipe.scripts
@@ -55,7 +61,7 @@ eggs =
      PasteScript
      transaction
      fanstatic
-     $${package}
+     ${ppackage}
 
 [python]
 recipe = z3c.recipe.scripts

@@ -6,7 +6,8 @@ from zope.interface import implements
 from zope.location import Location
 from zope.component import getGlobalSiteManager
 from uvclight.utils import Site
-from uvclight.bricks import Publication  # SecurePublication
+#from ul.auth import SecurePublication
+from ul.browser.publication import Publication
 
 
 class Root(Location):

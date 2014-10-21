@@ -8,7 +8,7 @@ parts =
     deploy_ini
     instance
     omelette
-    settings
+    pyrunner
 
 extends = 
     https://raw.github.com/goschtl/uvclight/master/requirements/uvclight_1.0.cfg
@@ -34,25 +34,35 @@ auto-checkout =
     uvc.design.canvas
     uvc.themes.dguv
     uvc.themes.btwidgets
-    uvc.basetheme
     uvc.content
-#   uvc.tb_layout
+    ul.auth
+    ul.sql
+    ul.browser
+    ul.zodb
+    ul.fs
+    ul.content
+    ul.traject
 
 
 [settings]
 dsn = sqlite://
-data_fs_dir = ${buildout:directory}/var
-blob_dir = ${buildout:directory}/var/blob
+data_fs_dir = $${buildout:directory}/var
+blob_dir = $${buildout:directory}/var/blob
 
 
 [sources]
 uvclight             = git https://github.com/goschtl/uvclight.git
-uvc.tb_layout        = git https://github.com/novareto/uvc.tb_layout.git
 uvc.design.canvas    = git https://github.com/novareto/uvc.design.canvas.git
 uvc.themes.dguv      = git https://github.com/novareto/uvc.themes.dguv.git
 uvc.themes.btwidgets = git https://github.com/novareto/uvc.themes.btwidgets.git
 uvc.content          = git https://github.com/novareto/uvc.content.git
-uvc.basetheme        = svn http://dev.bg-kooperation.de/repos/community/uvc.basetheme/trunk/
+ul.auth              = git https://github.com/novareto/ul.auth.git
+ul.sql               = git https://github.com/novareto/ul.sql.git
+ul.browser           = git https://github.com/novareto/ul.browser.git
+ul.zodb              = git https://github.com/novareto/ul.zodb.git
+ul.content           = git https://github.com/novareto/ul.content.git
+ul.fs                = git https://github.com/novareto/ul.fs.git
+ul.traject           = git https://github.com/novareto/ul.traject.git 
 
 
 [app]
@@ -70,7 +80,7 @@ eggs =
 
 [python]
 recipe = z3c.recipe.scripts
-interpreter = python
+interpreter = py
 eggs = $${app:eggs}
 
 
@@ -110,3 +120,10 @@ eggs =
     pytest
     $${app:eggs}
 arguments = ['src/${ppackage}/src/${ppackage}', '-s', '--doctest-glob=*.txt' ] + sys.argv[1:]
+
+
+[pyrunner]
+recipe = collective.recipe.scriptgen
+cmd = $${buildout:bin-directory}/$${python:interpreter}
+arguments = $${buildout:directory}/scripts/interactive.py $${deploy_ini:output} --browser
+

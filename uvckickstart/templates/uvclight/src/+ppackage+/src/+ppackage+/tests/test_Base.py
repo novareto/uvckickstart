@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+# Copyright (c) 2007-2013 NovaReto GmbH
+# cklinger@novareto.de
+
 from cromlech.browser.testing import TestRequest
 from grokcore.component import Context
 from zope.component import getMultiAdapter

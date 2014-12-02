@@ -36,13 +36,13 @@ auto-checkout =
     uvc.themes.btwidgets
     uvc.content
     uvc.api
-    ul.auth
-    ul.sql
-    ul.browser
-    ul.zodb
-    ul.fs
     ul.content
-    ul.traject
+    ul.browser
+#    ul.auth
+#    ul.sql
+#    ul.zodb
+#    ul.fs
+#    ul.traject
 
 
 [settings]

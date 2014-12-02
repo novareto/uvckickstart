@@ -35,6 +35,7 @@ auto-checkout =
     uvc.themes.dguv
     uvc.themes.btwidgets
     uvc.content
+    uvc.api
     ul.auth
     ul.sql
     ul.browser
@@ -63,6 +64,7 @@ ul.zodb              = git https://github.com/novareto/ul.zodb.git
 ul.content           = git https://github.com/novareto/ul.content.git
 ul.fs                = git https://github.com/novareto/ul.fs.git
 ul.traject           = git https://github.com/novareto/ul.traject.git 
+uvc.api              = svn https://uvcsite.googlecode.com/svn/hybrid/uvc.api/trunk
 
 
 [app]

@@ -15,3 +15,10 @@ class TestClass:
 #        view.update()
 #        assert "HALLO WELT" == view.render()
 
+#    # Achtung infrae.testbrowser muss zunächst installiert werden
+#    def test_browser(self, config, app):
+#        from infrae.testbrowser import Browser
+#        browser = Browser(app)
+#        browser.open('http://localhost')
+#        assert browser.status == "200 OK"
+

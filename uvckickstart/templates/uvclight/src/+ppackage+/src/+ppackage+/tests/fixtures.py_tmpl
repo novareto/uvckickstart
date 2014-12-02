@@ -20,7 +20,7 @@ def config(request):
 def app(request):
     """ load the paste.deploy wsgi environment from deploy.ini"""
     deploy_ini = "${deploy_ini}"
-    return loadapp(deploy_ini, name="main", global_conf={})
+    return loadapp(deploy_ini.replace('=', ':'), name="main", global_conf={})
 
 
 @pytest.fixture(scope="session")

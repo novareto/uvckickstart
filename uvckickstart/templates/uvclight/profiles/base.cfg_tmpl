@@ -14,17 +14,15 @@ extends =
     https://raw.github.com/goschtl/uvclight/master/requirements/uvclight_1.0.cfg
     versions.cfg
 versions = versions
-find-links = http://pypi.dolmen-project.org/find-links
+find-links = 
+    http://pypi.dolmen-project.org/find-links
+    http://dev.bg-kooperation.de/pypi/simple
 newest = false
-unzip = true
-extensions =
-   buildout.eggtractor
 
 
 extensions =
     mr.developer
     buildout.eggtractor
-    buildout.dumppickedversions
 
 tractor-src-directory = src
 tractor-target-parts = app 
@@ -68,7 +66,7 @@ uvc.api              = svn https://uvcsite.googlecode.com/svn/hybrid/uvc.api/tru
 
 
 [app]
-recipe = z3c.recipe.scripts
+recipe = zc.recipe.egg
 secret = coincoin
 tmp = $${buildout:directory}/var/tmp
 cachedir = $${buildout:directory}/var/cache
@@ -81,7 +79,7 @@ eggs =
      fanstatic
 
 [python]
-recipe = z3c.recipe.scripts
+recipe = zc.recipe.egg:script
 interpreter = py
 eggs = $${app:eggs}
 
@@ -117,7 +115,7 @@ recipe = collective.recipe.omelette
 eggs = $${app:eggs}
 
 [test]
-recipe = z3c.recipe.scripts
+recipe = zc.recipe.egg:script
 eggs = 
     pytest
     $${app:eggs}

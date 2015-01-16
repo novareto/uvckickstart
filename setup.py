@@ -15,8 +15,9 @@ setup(name='uvckickstart',
       install_requires=[
           'ZopeSkel==2.21.2',
           'grokproject>=2.9',
-          'zc.buildout==1.7.1',
+          'zc.buildout',
           'zest.releaser',
+          'setuptools==8.0'
       ],
       entry_points=
       {'paste.paster_create_template':

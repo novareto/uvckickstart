@@ -17,6 +17,8 @@ develop =
     src/${ppackage}
 
 find-links = http://pypi.dolmen-project.org/find-links
+	     http://dev.bg-kooperation.de/pypi/simple
+	     
 newest = false
 unzip = true
 versions = versions
@@ -47,9 +49,11 @@ gatekeeper           = git https://github.com/novareto/gatekeeper.git
 gk.layout            = git https://github.com/novareto/gk.layout.git
 uvc.content          = git https://github.com/novareto/uvc.content.git
 uvc.design.canvas    = git https://github.com/novareto/uvc.design.canvas.git
+uvc.themes.btwidgets = git https://github.com/novareto/uvc.themes.btwidgets
+
 
 [app]
-recipe = z3c.recipe.scripts
+recipe = zc.recipe.egg:script
 secret = coincoin
 tmp = $${buildout:directory}/var/tmp
 cachedir = $${buildout:directory}/var/cache
@@ -63,7 +67,7 @@ eggs =
      ${ppackage}
 
 [python]
-recipe = z3c.recipe.scripts
+recipe = zc.recipe.egg:script
 interpreter = python
 eggs = $${app:eggs}
 
@@ -101,7 +105,7 @@ recipe = collective.recipe.omelette
 eggs = $${app:eggs}
 
 [test]
-recipe = z3c.recipe.scripts
+recipe = zc.recipe.egg:script
 eggs = 
     pytest
     $${app:eggs}

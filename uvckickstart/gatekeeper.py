@@ -1,20 +1,20 @@
-from grokproject import GrokProject
-from paste.script import command
+# -*- coding: utf-8 -*-
+
 import optparse
 import pkg_resources
 import re
 import subprocess
 import sys
 import os.path
-from paste.script import templates
-from grokproject.utils import run_buildout
-from grokproject.utils import ask_var
-from paste.script.templates import NoDefault
+
+from grokproject import GrokProject
+from paste.script import command, templates
+from grokproject.utils import run_buildout, ask_var
 
 
-class LoginServer(templates.Template):
-    _template_dir = 'templates/loginserver'
-    summary = "An uvclight extranet template"
+class Gatekeeper(templates.Template):
+    _template_dir = 'templates/gatekeeper'
+    summary = "Gatekeeper SSO Login server"
 
     def check_vars(self, vars, cmd):
         vars['ppackage'] = vars['package'][:-11]
@@ -73,6 +73,6 @@ def main():
 
     # Create the project
     else:
-        exit_code = runner.run(option_args + ['-t', 'loginserver', project+'_gatekeeper'])
+        exit_code = runner.run(option_args + ['-t', 'gatekeeper', project+'_gatekeeper'])
     sys.exit(exit_code)
 

@@ -17,7 +17,7 @@ setup(name='uvckickstart',
           'grokproject>=2.9',
           'zc.buildout',
           'zest.releaser',
-          'setuptools==8.0'
+          'setuptools>=7.0'
       ],
       entry_points=
       {'paste.paster_create_template':

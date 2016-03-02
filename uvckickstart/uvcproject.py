@@ -103,6 +103,7 @@ def main():
     if options.grokversion:
         extra_args.append('grokversion=%s' % options.grokversion)
 
+    extra_args.append('version_url=False') # = False
     # Assert that the project name is a valid Python identifier
     if not (project_name_re.match(project).group() == project):
         print
@@ -110,7 +111,6 @@ def main():
               "package name: %s." % project
         print "Please choose a different project name."
         sys.exit(1)
-
 
     # Create the project
     else:

@@ -11,7 +11,7 @@ parts =
     pyrunner
 
 extends = 
-    https://raw.github.com/goschtl/uvclight/master/requirements/uvclight_1.0.cfg
+    https://raw.github.com/goschtl/uvclight/master/requirements/uvclight_1.1.cfg
     versions.cfg
 versions = versions
 find-links = 
@@ -28,20 +28,6 @@ tractor-src-directory = src
 tractor-target-parts = app 
 
 auto-checkout = 
-    uvclight
-    uvc.design.canvas
-    uvc.themes.dguv
-    uvc.themes.btwidgets
-    uvc.content
-    uvc.api
-    ul.content
-    ul.browser
-    uvc.entities
-#    ul.auth
-#    ul.sql
-#    ul.zodb
-#    ul.fs
-#    ul.traject
 
 
 [settings]

@@ -17,7 +17,8 @@ setup(name='uvckickstart',
           'grokproject>=2.9',
           'zc.buildout',
           'zest.releaser',
-          'setuptools>=7.0'
+          'setuptools>=7.0',
+          'plock',
       ],
       entry_points=
       {'paste.paster_create_template':
@@ -31,6 +32,7 @@ setup(name='uvckickstart',
         'uvclight = uvckickstart.uvclight:main',
         'gatekeeper = uvckickstart.gatekeeper:main',
         'uvcploneaddon = uvckickstart.uvcploneaddon:main',
+        'ploneproject = plock.install:install',
         'uvcaddon = uvckickstart.uvcaddon:main'],
        },
       )

@@ -6,4 +6,4 @@ playground/bin/easy_install -f http://dev.bg-kooperation.de/pypi/simple uvckicks
 
 PATH=$PATH:${PWD}/playground/bin/
 echo "export PATH='$PATH'" >> $HOME/.profile
-source $HOME/.profile
+. $HOME/.profile

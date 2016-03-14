@@ -2,5 +2,6 @@ sudo apt-get install python-dev python-virtualenv python-setuptools subversion g
 virtualenv playground 
 playground/bin/easy_install -f http://dev.bg-kooperation.de/pypi/simple uvckickstart
 
-pp=${PWD}/playground/bin
-export PATH="$pp:$PATH"
+PATH=$PATH:/${PWD}/playground/bin/
+echo "export PATH='$PATH'" >> $HOME/.profile
+source $HOME/.profile

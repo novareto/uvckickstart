@@ -3,5 +3,6 @@ virtualenv playground
 playground/bin/easy_install -f http://dev.bg-kooperation.de/pypi/simple uvckickstart
 
 PATH=$PATH:/${PWD}/playground/bin/
-echo "export PATH='$PATH'" >> $HOME/.profile
-source $HOME/.profile
+
+echo "Bitte exportiert das VERZEICHNIS IN EUER ENVIRONMENT"
+echo "export PATH '$PATH'"

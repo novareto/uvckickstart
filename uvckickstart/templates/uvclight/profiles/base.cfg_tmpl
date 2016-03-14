@@ -68,6 +68,7 @@ eggs =
      PasteScript
      transaction
      fanstatic
+     uvclight
 
 [python]
 recipe = zc.recipe.egg:script

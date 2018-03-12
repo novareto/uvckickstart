@@ -17,7 +17,6 @@ setup(name='uvckickstart',
           'grokproject==2.9',
           'zc.buildout>=2.9.5',
           'zest.releaser',
-          'setuptools>=7.0',
           'plock',
       ],
       entry_points=
